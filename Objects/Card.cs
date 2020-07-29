@@ -94,8 +94,8 @@ namespace Objects
             while (n > 1)
             {
                 int k = rng.Next(n--);
-                Card temp = deck[n];
-                deck[n] = deck[k];
+                Card temp = Card.CopyCard(deck[n]);
+                deck[n] = Card.CopyCard(deck[k]);
                 deck[k] = temp;
             }
         }
@@ -252,6 +252,10 @@ namespace Objects
 
             return usables;
 
+        }
+        public static Card CopyCard(Card old)
+        {
+            return Card.CreateCard(old.Val, old.Color, old.Type);
         }
         public static Card CreateCard(dynamic val,char color='W',string type="NoColorActCard")
         {
