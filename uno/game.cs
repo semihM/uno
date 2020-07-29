@@ -47,6 +47,7 @@ namespace Objects
                     Console.WriteLine($"Player {Players[i].name} created");
                 }
 
+                Console.Clear();
                 // Start the game
                 Console.WriteLine($"\nGame starts with {Players.Length} players. {Players[0].name} starts.");
                 
@@ -59,7 +60,8 @@ namespace Objects
                 char pickedcolorwild='N';
                 char[] colors = { 'R', 'G', 'B', 'Y' };
                 int orderindexer = 1;
-                
+                int playerIndex;
+
                 Player currentPlayer = Players[0];
                 Card chosenCard;
                 Card drawnCard;
@@ -107,10 +109,13 @@ namespace Objects
                     else
                     {
                         turn += orderindexer;
-                        Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                        playerIndex = turn % N_Players;
+                        if (playerIndex < 0) { playerIndex = Math.Abs(playerIndex); }
+
+                        Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
                         if (Card.GetLen(Deck) != 0)
                         {
-                            Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                            Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
                         }
                     }
                 }
@@ -119,13 +124,16 @@ namespace Objects
                     if (Middle[0].Val == "Draw4")
                     {
                         turn += orderindexer;
-                        Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                        playerIndex = turn % N_Players;
+                        if (playerIndex < 0) { playerIndex = Math.Abs(playerIndex); }
+
+                        Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
 
                         for (int k = 0; k < 3; k++)
                         {
                             if (Card.GetLen(Deck) != 0)
                             {
-                                Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                                Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
                             }
 
                         }
@@ -279,10 +287,15 @@ namespace Objects
                                 {
                                     turn += N_Players;
                                 }
-                                Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+
+                                playerIndex = turn % N_Players;
+                                if (playerIndex < 0) { playerIndex = Math.Abs(playerIndex); }
+
+                                Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
+
                                 if (Card.GetLen(Deck) != 0)
                                 {
-                                    Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                                    Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
                                 }
                             }
                         }
@@ -291,13 +304,16 @@ namespace Objects
                             if (Middle[middlelength].Val == "Draw4")
                             {
                                 turn += orderindexer;
-                                Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                                playerIndex = turn % N_Players;
+                                if(playerIndex < 0) { playerIndex = Math.Abs(playerIndex); }
+
+                                Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
 
                                 for (int k = 0; k < 3; k++)
                                 {
                                     if (Card.GetLen(Deck) != 0)
                                     {
-                                        Player.AddToHand(Players[turn % N_Players], Card.DrawCard(Deck));
+                                        Player.AddToHand(Players[playerIndex], Card.DrawCard(Deck));
                                     }
 
                                 }
